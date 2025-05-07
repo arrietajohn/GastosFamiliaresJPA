@@ -1,0 +1,38 @@
+@startuml
+
+left to right direction
+
+actor Miembro as Miembro
+
+Miembro --> Gestion_De_Gastos
+
+package Gestion_De_Gastos {
+    (Registrar mis Gastos) as CU1
+    (Consultar un Gasto) as CU2
+    (Editar mis Gastos) as CU3
+    (Eliminar mis Gastos) as CU4
+    (Listar mis Gastos) as CU5
+    (Consultar Categoria) as CUE1
+    (Consultar BolsaDeAhorros) as CUE2
+    (Listar mis Gastos por Categoria) as CU6
+    (Listar mis Gastos por \nBolsa de ahorro) as CU7 
+    (Listar mis Gastos por fecha) as CU8
+    (Listar mis Gastos por periodo) as CU9 
+    (Listar mis Gastos por valor) as CU10
+    (Listar mis Gastos \nentre rango de valores) as CU11
+    CU3 --> CU2 : Include
+    CU4 --> CU2 : Include
+    CU6 --> CUE1 : Include
+    CU7 --> CUE2 : Include
+    CU5 <|-- CU6
+    CU5 <|-- CU7
+    CU5 <|-- CU8
+    CU5 <|-- CU9
+    CU5 <|-- CU10
+    CU5 <|-- CU11
+ 
+    
+}
+
+
+@enduml

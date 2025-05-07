@@ -1,0 +1,29 @@
+@startuml
+
+left to right direction
+actor Administrador as Admin
+actor Miembro as Miembro
+
+package Gestion_de_Categorias {
+
+    (Crear Categoria) as CUF1
+    (Consultar Categoria) as CUF2
+    (Modificar Categoria) as CUF3
+    (Eliminar Categoria) as CUF4
+    (Listar categorias) as CUF5
+   
+    CUF3 --> CUF2 : Include
+    CUF4 --> CUF2 : Include
+    Miembro --> CUF1
+    Miembro --> CUF2
+    Miembro --> CUF3
+    Miembro --> CUF4
+    Miembro --> CUF5
+
+    Admin --> CUF1
+    Admin --> CUF2
+    Admin --> CUF3
+    Admin --> CUF4
+}
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+
+left to right direction
+actor Usuario as User
+actor Miembro as Miembro
+
+package Gestion_de_Miembros {
+    (Registrarse como Miembro) as CU1
+    (Solicitar ser \nMiembro de una Familia) as CU2 
+    (Sacar Miembro de Familia) as CU3
+    note right: Solo para miembros creadores de familia
+    (Consultar perfil Miembro) as CU4
+    (Editar mi perfil Miembro) as CU5
+    (Listar miembros de mi Familia) as CU6
+    (Listar miembros de \nmi Familia por Rol) as CU7
+    (Listar miembros de \nmi Familia por Oficio) as CU8
+    (Listar miembros de \nmi Familia con aportes) as CU9
+    (Listar miembros de \nmi Familia por genero) as CU10
+    (Listar miembros de \nmi Familia menores de Edad) as CU11
+    (Listar miembros de \nmi Familia mayores de Edad) as CU12
+    (Listar miembros de \nmi Familia desocupados) as CU13
+    User -->  CU1 
+    CU1 --> (Consultar Familia) : Include
+    User -->  CU2 
+    CU2 --> (Consultar Familia) : Include
+    Miembro  --> CU3
+    CU3 --> CU4 : Include
+    Miembro --> CU4 
+    Miembro --> CU5 
+    CU5 --> CU4  : Include    
+    Miembro --> CU6
+    CU6 <|--  CU7
+    CU6 <|--  CU8
+    CU6 <|--  CU9
+    CU6 <|--  CU10
+    CU6 <|--  CU11
+    CU6 <|--  CU12
+    CU6 <|--  CU13
+
+}
+@enduml

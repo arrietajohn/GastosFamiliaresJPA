@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+:Usuario: as User
+package Seguridad{
+    User --> (Registrarme)
+    User <-- (Iniciar Sesion)
+    User -- (Cerrar Sesion)
+    User --> (Actualizar mi perfil)
+    User --> (Cerrar cuenta)
+    User <-- (Recordar password)
+}
+@enduml

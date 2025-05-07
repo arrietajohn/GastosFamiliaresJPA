@@ -1,0 +1,40 @@
+@startuml
+
+left to right direction
+actor Miembro as Miembro
+
+Miembro <--> Gestion_de_BolsaDeAhorro
+
+package Gestion_de_BolsaDeAhorro {
+    (Crear Bolsa de Ahorro para mi familia) as CU1
+    (Editar Bolsade Ahorro \n de mi familia) as CU2
+    (Cerrar Bolsa de Ahorro \n de mi familia) as CU3
+    (Ver Progreso de Ahorro \n de mi familia) as CU4
+    (Consultar Bolsa de Ahorro\n de mi familia) as CU5
+    (Listar Bolsas de Ahorros\n de mi familia) as CU6
+    (Listar Bolsas de Ahorros\n de mi familia por estado) as CU7
+    (Listar Bolsas de Ahorros\n de mi familia por monto) as CU8
+    (Listar Bolsas de Ahorros\n de mi familia con monto entre rango) as CU9
+    (Listar Bolsas de Ahorros\n de mi familia por fechaInicio) as CU10
+    (Listar Bolsas de Ahorros\n de mi familia por periodo Inicio) as CU11
+    (Listar Bolsas de Ahorros\n de mi familia por fechaCierre) as CU12
+    (Listar Bolsas de Ahorros\n de mi familia por periodo de cierre) as CU13
+    (Listar Bolsas de Ahorros\n de mi familia por Proposito) as CU14
+    (Listar Bolsas de Ahorros\n de mi familia por Nombre) as CU15
+    CU2 --> CU5 : Include
+    CU3 --> CU5 : Include
+    CU4 --> CU5 : Include
+    CU6 <|-- CU7
+    CU6 <|-- CU8
+    CU6 <|-- CU9
+    CU6 <|-- CU10
+    CU6 <|-- CU11
+    CU6 <|-- CU12
+    CU6 <|-- CU13
+    CU6 <|-- CU14
+    CU6 <|-- CU15
+
+}
+    
+
+@enduml

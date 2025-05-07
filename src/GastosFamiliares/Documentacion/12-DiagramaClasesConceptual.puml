@@ -1,0 +1,176 @@
+@startuml
+left to right direction
+
+'--------------
+' CLASES CONCEPTUALES
+'--------------
+
+class Usuario{
+    # String codigo; 
+    # String password;
+    # String nombre;
+    # String apellido;
+    # RolUsuarioEnum rol; 
+    # String email;
+    --
+    + Usuario()
+    + String getCodigo()
+    + void setCodigo(String codigo)
+}
+
+class Familia{
+    - int id; ' Autoincremental
+    - String nombre;
+    - Usuario creador;
+    - String direccion;
+    - String numeroDeTelefono;  
+    - String email;
+    ' Relaciones
+    - List<Miembro> miembros;
+    - List<BolsaDeAhorro> bolsasDeAhorros;
+}
+
+class Miembro{
+    - String segundNombre;
+    - String segundApellido;
+    - GeneroEnum genero; 
+    - LocalDate fechaNacimiento;
+    - String numeroTelefonico;
+    - String foto;
+    - String ocupacion;
+       ' Relaciones
+    - RolFamiliaEnum rol; 
+    - Familia familia;
+    - List<Ingreso> ingresos;
+    - List<Gasto> gastos;
+    - List<Aporte> aportes;
+    - List<BolsaDeAhorro> bolsasDeAhorros;
+}
+
+class Fuente {
+    - int id; ' Autoincremental
+    - String nombre; 'unico
+    - String descripcion; 
+    - String icono;
+    ' Relaciones
+    - List<Ingreso> ingresos;
+}
+
+class Ingreso{
+    - int id; ' Autoincremental
+    ' Fecha actual automatica 
+    - LocalDateTime fechaRegistro; 
+    - LocalDate fecha;
+    - String nombre
+    - float valor;
+    - String descripcion;
+    ' Realaciones
+    - Fuente fuente;
+    - Miembro miembro;
+    - List<Aporte> aportes;  ' Puede ser null
+}
+
+class Categoria{
+    - int id; ' Autoincremental
+    - String nombre; 'unico
+    - String descripcion; 
+    - String icono;
+    ' Realaciones
+    - List<Gasto> gastos; 
+}
+
+class Gasto{
+    - int id; ' Autoincremental
+    ' Fecha actual automatica 
+    - LocalDateTime fechaRegistro; 
+    - LocalDate fecha;
+    - String nombre
+    - float valor;
+    - String descripcion;
+     ' Realaciones
+    - Miembro miembro;
+    - List<Categoria> categorias;
+    - Aporte aportes; ' Puede ser null
+}
+
+class BolsaDeAhorro{
+     - int id; ' Autoincremental
+     - LocalDateTime fechaRegistro; 
+     - LocalDate fechaIncia; 
+     - LocalDate fechaFin; 
+     - String nombre;
+     - float montoIdeal;
+     - String proposito;
+      ' Realaciones
+     - EstadoBolsaAhorroEnum estado;
+     - Familia familia;
+     - Miembro creador;
+     - List<Aporte> aportes;
+}
+
+
+class Aporte{
+    - int id; ' Autoincremental
+    - LocalDateTime fechaRegistro;
+    - float valor;
+       ' Realaciones
+    - BolsaDeAhorro bolsaDeAhoro;
+    - Miembro miembre;
+    - Ingreso ingreso;
+    - Gasto gasto;
+
+}
+
+'--------------
+' RELACONES
+'--------------
+Usuario <|-- Miembro : Es un
+Familia "1" -- "*" Miembro : Pertenecer
+Familia "*" -- "1" Usuario : Crear
+Fuente "1" -- "*" Ingreso : Proveer
+Ingreso "*" -- "1" Miembro : Registrar
+Gasto "*" -- "*" Categoria : Pertenecer
+Gasto "*" -- "1" Miembro : Registrar
+BolsaDeAhorro "*" -- "1" Familia : Pertenecer
+BolsaDeAhorro "*" -- "1" Miembro : Crear
+Aporte "*" -- "1" Miembro : Contribuir
+Aporte "*" -- "1" BolsaDeAhorro : Pertenecer
+Aporte "*" -- "1" Ingreso : Provenir
+Aporte "0..1" -- "1" Gasto : Regitrar
+
+'--------------
+' ENUMERACIONES
+'--------------
+
+enum RolUsuarioEnum{
+     ADMINISTRADOR,
+      USUARIO
+}
+
+enum GeneroEnum{
+     MASCULINO, 
+    FEMENINO, 
+    OTROS
+}
+
+enum RolFamiliaEnum{
+    ABUELO, 
+    ABUELA, 
+    PADRE, 
+    MADRE, 
+    HIJO, 
+    HIJA, 
+    TIO, 
+    TIA, 
+    PRIMO, 
+    PRIMA 
+}
+
+enum EstadoBolsaAhorroEnum{
+    ACTIVA, 
+    CERRADA, 
+    LOGRADA   
+
+}
+
+@enduml

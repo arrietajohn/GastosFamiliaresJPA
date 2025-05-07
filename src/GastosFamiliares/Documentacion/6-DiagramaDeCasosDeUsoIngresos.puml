@@ -1,0 +1,38 @@
+@startuml
+
+left to right direction
+
+actor Miembro as Miembro
+
+Miembro --> Gestion_De_Ingresos
+
+package Gestion_De_Ingresos {
+    (Registrar mis Ingresos) as CU1
+    (Consultar un Ingreso) as CU2
+    (Editar mis Ingresos) as CU3
+    (Eliminar mis Ingresos) as CU4
+    (Listar mis Ingresos) as CU5
+    (Consultar fuente) as CUE1
+    (Consultar Bolsa de ahorros) as CUE2
+    (Listar mis Ingresos por Fuente) as CU6
+    (Listar mis Ingresos por \nBolsa de ahorro) as CU7 
+    (Listar mis Ingresos por fecha) as CU8
+    (Listar mis Ingresos por periodo) as CU9 
+    (Listar mis Ingresos por valor) as CU10
+    (Listar mis Ingresos \nentre rango de valores) as CU11
+    CU3 --> CU2 : Include
+    CU4 --> CU2 : Include
+    CU6 --> CUE1 : Include
+    CU7 --> CUE2 : Include
+    CU5 <|-- CU6
+    CU5 <|-- CU7
+    CU5 <|-- CU8
+    CU5 <|-- CU9
+    CU5 <|-- CU10
+    CU5 <|-- CU11
+ 
+    
+}
+
+
+@enduml
