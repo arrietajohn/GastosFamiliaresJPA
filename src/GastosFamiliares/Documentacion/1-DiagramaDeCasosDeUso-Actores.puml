@@ -1,0 +1,7 @@
+@startuml
+    :Usuario: as User
+    :Administrador: as Admin
+    :Miembro: as Miembro
+    User <|-- Admin
+    User <|-- Miembro
+@enduml

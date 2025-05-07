@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor Usuario as User
+actor Administrador as Admin
+actor Miembro as Miembro
+
+package Gestion_de_Familias {
+    Miembro  --> (Crear mi Familia)
+    Miembro --> (Actualizar Información de mi la Familia)
+    Miembro --> (Eliminar mi Familia)
+    Admin --> (Eliminar Familia)
+    Miembro --> (Invitar un miebro\n Miembro a mi familia)
+    Miembro --> (Asignar Rol Familiar a un mimbro)
+    User <-- (Listar nombres de\n Familias Registradas)
+    Miembro --> (Aprobar/Rechazar solicitud \nde Miembro familiar)
+}
+@enduml

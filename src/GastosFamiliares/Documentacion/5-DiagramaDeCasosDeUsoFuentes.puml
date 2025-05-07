@@ -1,0 +1,32 @@
+@startuml
+
+left to right direction
+
+actor Administrador as Admin
+actor Miembro as Miembro
+
+package Gestion_de_Fuentes {
+
+    (Crear Fuente) as CUF1
+    (Consultar Fuente) as CUF2
+    (Modificar Fuente) as CUF3
+    (Eliminar Fuente) as CUF4
+    (Listar fuentes) as CUF5
+    (Listar fuentes que aportan\n a Bolsa de ahorros) as CUF6
+    CUF3 --> CUF2 : Include
+    CUF4 --> CUF2 : Include
+    Miembro --> CUF1
+    Miembro --> CUF2
+    Miembro --> CUF3
+    Miembro --> CUF4
+    Miembro --> CUF5
+    Miembro --> CUF6
+    Admin --> CUF1
+    Admin --> CUF2
+    Admin --> CUF3
+    Admin --> CUF4
+    Admin --> CUF5
+}
+
+
+@enduml

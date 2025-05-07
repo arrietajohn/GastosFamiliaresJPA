@@ -1,0 +1,43 @@
+@startuml
+
+left to right direction
+actor Miembro as Miembro
+
+
+package Gestion_De_Aportes {
+    (Realizar Aporte) as CUA1
+    (Consultar Aporte) as CUA2
+    (Editar Aporte) as CUA3
+    (Eliminar Aporte) as CUA4
+    (Consultar Aporte) as CUA5
+    (Consultar Aporte por Ingreso) as CUA6
+    (Consultar Aporte por gasto) as CUA7
+    (Consultar Ingreso) as CUA8
+    (Consultar Gasto) as CUA9
+    (Consultar BolsaDeAhorro) as CUA10
+    (Listar aportes) as CUA11
+    (Listar aportes por valor) as CUA12
+    (Listar aportes por rango de valor) as CUA13
+    (Listar aportes por fecha) as CUA14
+    (Listar aportes por rango de fecha) as CUA15
+    (Listar aportes por Miembro) as CUA16
+    (Listar aportes por Bolsa de ahorro) as CUA18
+    (Consultar miembro) as CUA17
+    (Consultar Bolsa de ahorro) as CUA19
+    CUA3 --> CUA2 : Include
+    CUA4 --> CUA2 : Include
+    CUA6 --> CUA8 : Include
+    CUA7 --> CUA9 : Include
+    CUA11 --> CUA10 : Include
+    CUA11 <|-- CUA12
+    CUA11 <|-- CUA13
+    CUA11 <|-- CUA14
+    CUA11 <|-- CUA15
+    CUA11 <|-- CUA16
+    CUA11 <|-- CUA18
+    CUA16 --> CUA17 : Include
+    CUA18 --> CUA19 : Include
+    Miembro --> Gestion_De_Aportes
+    
+}
+@enduml

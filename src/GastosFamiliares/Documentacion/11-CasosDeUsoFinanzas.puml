@@ -1,0 +1,31 @@
+@startuml
+actor Miembro as Miembro
+
+Miembro --> MisFinanzas
+
+package MisFinanzas{
+    (Consultar mi Saldo) as CU1
+    (Consultar mi Saldo por fecha) as CU2
+    (Consultar mi Saldo por perido) as CU3
+    (Consultar mi total \nde ingresos por Fuente) as CU4
+    (Consultar mi total de\n gastos por Categoria) as CU5
+    (Consultar mis Fuentes \ncon Mayores Ingresos) as CU6
+    (Consultar mis Fuentes \ncon Menores Ingresos) as CU7
+    (Consultar mis Categorias \ncon Mayores Gastos) as CU8
+    (Consultar mis Categorias\n con Menores Gastos) as CU9
+    (Consultar mis Bolsas \ncon Mayores aportes) as CU10
+    (Consultar mis Bolsas \ncon Menores aportes) as CU11
+    (Consultar mi Promedio \nde Ingresos) as CU12
+    (Consultar mi Promedio \n de gastos) as CU13
+    (Consultar mi Promedio \nde Ingresos por fecha) as CU14
+    (Consultar mi Promedio \nde gastos por fecha) as CU15
+    (Consultar mi Promedio \nde Ingresos por perido) as CU16
+    (Consultar mi Promedio \nde gastos por periodo) as CU17
+    (Consultar mi Promedio \nde Ingresos por Fuente) as CU18
+    (Consultar mi Promedio \nde gastos por Categoria) as CU19
+    (Consultar Total \nde Ahorros de mi familia) as CU20
+
+}
+
+
+@enduml
