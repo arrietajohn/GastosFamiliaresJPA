@@ -110,6 +110,13 @@ public class Usuario implements Serializable {
         final Usuario other = (Usuario) obj;
         return Objects.equals(this.codigo, other.codigo);
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "codigo=" + codigo + ", password=" + password + 
+                ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" 
+                + rol + ", email=" + email + '}';
+    }
     
     
     
