@@ -6,26 +6,47 @@ import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
+@Entity
 public class Miembro extends Usuario implements Serializable {
 
+    private static final long serialVersionUID = 0L;
+    
+    @Column(length = 30)
     private String segundoNombre;
+    @Column(length = 50)
     private String segundoApellido;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 10)
     private GeneroEnum genero;
     private LocalDate fechaNacimiento;
+    @Column(length = 30)
     private String numeroTelefonico;
+    @Column(length = 25)
     private String foto;
+    @Column(length = 40)
     private String ocupacion;
 //       ' Relaciones
     private RolFamiliaEnum rolFamilia;
+    @ManyToOne
     private Familia familia;
+    @OneToMany(mappedBy = "miembro")
     private List<Ingreso> ingresos;
+    @OneToMany(mappedBy = "miembro")
     private List<Gasto> gastos;
+    @OneToMany(mappedBy = "miembro")
     private List<Aporte> aportes;
+    @OneToMany(mappedBy = "creador")
     private List<BolsaDeAhorro> bolsasDeAhorros;
 
     // Cosntructores
@@ -52,7 +73,6 @@ public class Miembro extends Usuario implements Serializable {
     }
 
     // Set Get
-
     public String getSegundoNombre() {
         return segundoNombre;
     }
@@ -117,8 +137,6 @@ public class Miembro extends Usuario implements Serializable {
         this.rolFamilia = rolFamilia;
     }
 
-    
-
     public Familia getFamilia() {
         return familia;
     }
@@ -161,15 +179,13 @@ public class Miembro extends Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Miembro{" + "segundoNombre=" + segundoNombre + ", segundoApellido=" 
-                + segundoApellido + ", genero=" + genero + ", fechaNacimiento=" 
-                + fechaNacimiento + ", numeroTelefonico=" + numeroTelefonico 
-                + ", foto=" + foto + ", ocupacion=" + ocupacion + ", rolFamilia=" 
-                + rolFamilia + ", familia=" + familia + ", ingresos=" + ingresos 
-                + ", gastos=" + gastos + ", aportes=" + aportes + ", bolsasDeAhorros=" 
+        return "Miembro{" + "segundoNombre=" + segundoNombre + ", segundoApellido="
+                + segundoApellido + ", genero=" + genero + ", fechaNacimiento="
+                + fechaNacimiento + ", numeroTelefonico=" + numeroTelefonico
+                + ", foto=" + foto + ", ocupacion=" + ocupacion + ", rolFamilia="
+                + rolFamilia + ", familia=" + familia + ", ingresos=" + ingresos
+                + ", gastos=" + gastos + ", aportes=" + aportes + ", bolsasDeAhorros="
                 + bolsasDeAhorros + '}';
     }
-    
-    
-     
+
 }

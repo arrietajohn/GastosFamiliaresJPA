@@ -4,26 +4,54 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
-public class Gasto implements Serializable{
-    private int id; // ' Autoincremental
+@Entity
+@Table(name = "Gastos")
+public class Gasto implements Serializable {
+
+    private static final long serialVersionUID = 0L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     //    ' Fecha actual automatica 
-    private LocalDateTime fechaRegistro; 
+    private LocalDateTime fechaRegistro;
     private LocalDate fecha;
+    @Column(length = 50, nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private float valor;
     private String descripcion;
     //     ' Realaciones
+    @ManyToOne
     private Miembro miembro;
+    @ManyToOne(optional = true)
+    @JoinColumn(nullable = true)
+    private Aporte aporte; 
+    @ManyToMany
+    @JoinTable(
+        name = "Categorias_Gastos",
+        joinColumns = @JoinColumn(name = "GASTO_ID"),
+        inverseJoinColumns = @JoinColumn(name = "CATEGORIA_ID")
+    )
     private List<Categoria> categorias;
-    private Aporte aporte; //' Puede ser null
     
-    // Constructores
 
+    // Constructores
     public Gasto() {
     }
 
@@ -33,7 +61,7 @@ public class Gasto implements Serializable{
         this.valor = valor;
         this.miembro = miembro;
     }
-    
+
     public Gasto(int id, LocalDateTime fechaRegistro, LocalDate fecha, String nombre, float valor, String descripcion, Miembro miembro, List<Categoria> categorias, Aporte aporte) {
         this.id = id;
         this.fechaRegistro = fechaRegistro;
@@ -45,9 +73,8 @@ public class Gasto implements Serializable{
         this.categorias = categorias;
         this.aporte = aporte;
     }
-    
-    // Set y get
 
+    // Set y get
     public int getId() {
         return id;
     }
@@ -120,8 +147,6 @@ public class Gasto implements Serializable{
         return aporte;
     }
 
-  
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -146,12 +171,11 @@ public class Gasto implements Serializable{
 
     @Override
     public String toString() {
-        return "Gasto{" + "id=" + id + ", fechaRegistro=" + fechaRegistro 
-                + ", fecha=" + fecha + ", nombre=" + nombre + ", valor=" 
-                + valor + ", descripcion=" + descripcion + ", miembro=" 
-                + miembro + ", categorias=" + (categorias != null ? categorias.size() : 0 )
-                + ", aporte =" + aporte  + '}';
+        return "Gasto{" + "id=" + id + ", fechaRegistro=" + fechaRegistro
+                + ", fecha=" + fecha + ", nombre=" + nombre + ", valor="
+                + valor + ", descripcion=" + descripcion + ", miembro="
+                + miembro + ", categorias=" + (categorias != null ? categorias.size() : 0)
+                + ", aporte =" + aporte + '}';
     }
-    
-    
+
 }

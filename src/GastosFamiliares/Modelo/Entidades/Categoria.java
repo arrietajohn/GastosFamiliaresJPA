@@ -3,22 +3,37 @@ package GastosFamiliares.Modelo.Entidades;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
-public class Categoria implements Serializable{
+@Entity
+@Table(name = "Categorias")
+public class Categoria implements Serializable {
 
-    private int id; // ' Autoincremental
+    private static final long serialVersionUID = 0L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id; 
+    @Column(nullable = false, unique = true, length = 50)
     private String nombre; // 'unico
     private String descripcion;
+    @Column( length = 20)
     private String icono;
 //    ' Realaciones
+    @ManyToMany(mappedBy = "categorias")
     private List<Gasto> gastos;
-    
-    // Constructores
 
+    // Constructores
+    
     public Categoria() {
     }
 
@@ -27,7 +42,6 @@ public class Categoria implements Serializable{
         this.descripcion = descripcion;
     }
 
-    
     public Categoria(int id, String nombre, String descripcion, String icono, List<Gasto> gastos) {
         this.id = id;
         this.nombre = nombre;
@@ -35,10 +49,8 @@ public class Categoria implements Serializable{
         this.icono = icono;
         this.gastos = gastos;
     }
-    
-    
-    // Set y get 
 
+    // Set y get 
     public int getId() {
         return id;
     }
@@ -101,7 +113,4 @@ public class Categoria implements Serializable{
         return Objects.equals(this.nombre.toLowerCase(), other.nombre.toLowerCase());
     }
 
-  
-    
-    
 }

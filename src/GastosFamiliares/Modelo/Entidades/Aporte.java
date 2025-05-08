@@ -2,21 +2,37 @@ package GastosFamiliares.Modelo.Entidades;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
+@Entity
+@Table(name = "Aportes")
 public class Aporte implements Serializable{
 
-    private int id; //' Autoincremental
+    private static final long serialVersionUID = 0L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id; 
     private LocalDateTime fechaRegistro;
+    @Column(nullable = false)
     private float valor;
     //       ' Realaciones
-    private BolsaDeAhorro bolsaDeAhoro;
-    private Miembro miembre;
+    @ManyToOne
+    private BolsaDeAhorro bolsaDeAhorro;
+    @ManyToOne
+    private Miembro miembro;
+    @ManyToOne
     private Ingreso ingreso;
-    private Gasto gasto;
     
     // Constructores
 
@@ -25,20 +41,20 @@ public class Aporte implements Serializable{
 
     public Aporte(float valor, BolsaDeAhorro bolsaDeAhoro, Miembro miembre, Ingreso ingreso) {
         this.valor = valor;
-        this.bolsaDeAhoro = bolsaDeAhoro;
-        this.miembre = miembre;
+        this.bolsaDeAhorro = bolsaDeAhoro;
+        this.miembro = miembre;
         this.ingreso = ingreso;
     }
 
     
-    public Aporte(int id, LocalDateTime fechaRegistro, float valor, BolsaDeAhorro bolsaDeAhoro, Miembro miembre, Ingreso ingreso, Gasto gasto) {
+    public Aporte(int id, LocalDateTime fechaRegistro, float valor, BolsaDeAhorro bolsaDeAhoro, Miembro miembre, Ingreso ingreso) {
         this.id = id;
         this.fechaRegistro = fechaRegistro;
         this.valor = valor;
-        this.bolsaDeAhoro = bolsaDeAhoro;
-        this.miembre = miembre;
+        this.bolsaDeAhorro = bolsaDeAhoro;
+        this.miembro = miembre;
         this.ingreso = ingreso;
-        this.gasto = gasto;
+
     }
     
     // Get y Set
@@ -67,36 +83,28 @@ public class Aporte implements Serializable{
         this.valor = valor;
     }
 
-    public BolsaDeAhorro getBolsaDeAhoro() {
-        return bolsaDeAhoro;
+    public BolsaDeAhorro getBolsaDeAhorro() {
+        return bolsaDeAhorro;
     }
 
-    public void setBolsaDeAhoro(BolsaDeAhorro bolsaDeAhoro) {
-        this.bolsaDeAhoro = bolsaDeAhoro;
+    public void setBolsaDeAhorro(BolsaDeAhorro bolsaDeAhorro) {
+        this.bolsaDeAhorro = bolsaDeAhorro;
     }
 
-    public Miembro getMiembre() {
-        return miembre;
+    public Miembro getMiembro() {
+        return miembro;
     }
 
-    public void setMiembre(Miembro miembre) {
-        this.miembre = miembre;
+    public void setMiembro(Miembro miembro) {
+        this.miembro = miembro;
     }
-
+    
     public Ingreso getIngreso() {
         return ingreso;
     }
 
     public void setIngreso(Ingreso ingreso) {
         this.ingreso = ingreso;
-    }
-
-    public Gasto getGasto() {
-        return gasto;
-    }
-
-    public void setGasto(Gasto gasto) {
-        this.gasto = gasto;
     }
 
     @Override
@@ -124,9 +132,8 @@ public class Aporte implements Serializable{
     @Override
     public String toString() {
         return "Aporte{" + "id=" + id + ", fechaRegistro=" + fechaRegistro 
-                + ", valor=" + valor + ", bolsaDeAhoro=" + bolsaDeAhoro 
-                + ", miembre=" + miembre + ", ingreso=" + ingreso 
-                + ", gasto=" + gasto + '}';
+                + ", valor=" + valor + ", bolsaDeAhoro=" + bolsaDeAhorro 
+                + ", miembre=" + miembro + ", ingreso=" + ingreso + " \"}";
     }
     
     

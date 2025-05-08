@@ -4,27 +4,44 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
-public class Ingreso implements  Serializable{
+@Entity
+@Table(name = "Ingresos")
+public class Ingreso implements Serializable {
 
-    private int id; //' Autoincremental
-    //    ' Fecha actual automatica 
+    private static final long serialVersionUID = 0L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private LocalDateTime fechaRegistro;
     private LocalDate fecha;
+    @Column(length = 50, nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private float valor;
     private String descripcion;
     //     ' Realaciones
+    @ManyToOne
     private Fuente fuente;
+    @ManyToOne
     private Miembro miembro;
+    @OneToMany(mappedBy = "ingreso")
     private List<Aporte> aportes; //' Puede ser null
-    
-    // Constructores
 
+    // Constructores
     public Ingreso() {
     }
 
@@ -36,7 +53,6 @@ public class Ingreso implements  Serializable{
         this.miembro = miembro;
     }
 
-    
     public Ingreso(int id, LocalDateTime fechaRegistro, LocalDate fecha, String nombre, float valor, String descripcion, Fuente fuente, Miembro miembro, List<Aporte> aportes) {
         this.id = id;
         this.fechaRegistro = fechaRegistro;
@@ -48,9 +64,8 @@ public class Ingreso implements  Serializable{
         this.miembro = miembro;
         this.aportes = aportes;
     }
-    
-    // Set y Get
 
+    // Set y Get
     public int getId() {
         return id;
     }
@@ -147,11 +162,10 @@ public class Ingreso implements  Serializable{
 
     @Override
     public String toString() {
-        return "Ingreso{" + "id=" + id + ", fechaRegistro=" + fechaRegistro + 
-                ", fecha=" + fecha + ", nombre=" + nombre + ", valor=" + valor 
-                + ", descripcion=" + descripcion + ", fuente=" + fuente +
-                ", miembro=" + miembro + ", aportes=" + aportes + '}';
+        return "Ingreso{" + "id=" + id + ", fechaRegistro=" + fechaRegistro
+                + ", fecha=" + fecha + ", nombre=" + nombre + ", valor=" + valor
+                + ", descripcion=" + descripcion + ", fuente=" + fuente
+                + ", miembro=" + miembro + ", aportes=" + aportes + '}';
     }
-    
-    
+
 }

@@ -9,7 +9,7 @@ import GastosFamiliares.Infrastuctura.Config.Bd.ConexionBd;
 public class Principal {
     public static void main(String parametros[]){
         System.out.println("Prueba del proyecto");
-        ConexionBd.conectar();
-        ConexionBd.desconectar();
+//        ConexionBd.conectar();
+//        ConexionBd.desconectar();
     }
 }

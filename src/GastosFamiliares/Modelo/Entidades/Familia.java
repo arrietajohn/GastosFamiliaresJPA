@@ -2,24 +2,46 @@ package GastosFamiliares.Modelo.Entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
-public class Familia implements Serializable{
-    private int id; // ' Autoincremental
+@Entity
+@Table(name = "Familias")
+public class Familia implements Serializable {
+
+    private static final long serialVersionUID = 0L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(length = 150, nullable = false)
     private String nombre;
-    private Usuario creador;
     private String direccion;
-    private String numeroDeTelefono;  
+    @Column(length = 30)
+    private String numeroDeTelefono;
+    @Column(length = 70, unique = true)
     private String email;
 //    ' Relaciones
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "USUARIO_CREADOR_ID")
+    private Usuario creador;
+    @OneToMany(mappedBy = "familia")
     private List<Miembro> miembros;
+    @OneToMany(mappedBy = "familia")
     private List<BolsaDeAhorro> bolsasDeAhorros;
-    
-    // Constructores
 
+    // Constructores
     public Familia() {
     }
 
@@ -127,11 +149,10 @@ public class Familia implements Serializable{
 
     @Override
     public String toString() {
-        return "Familia{" + "id=" + id + ", nombre=" + nombre + ", creador=" 
-                + creador + ", direccion=" + direccion + ", numeroDeTelefono=" 
-                + numeroDeTelefono + ", email=" + email + ", miembros=" 
+        return "Familia{" + "id=" + id + ", nombre=" + nombre + ", creador="
+                + creador + ", direccion=" + direccion + ", numeroDeTelefono="
+                + numeroDeTelefono + ", email=" + email + ", miembros="
                 + miembros + ", bolsasDeAhorros=" + bolsasDeAhorros + '}';
     }
-    
-    
+
 }
