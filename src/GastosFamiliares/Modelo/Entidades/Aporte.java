@@ -27,11 +27,11 @@ public class Aporte implements Serializable{
     @Column(nullable = false)
     private float valor;
     //       ' Realaciones
-    @ManyToOne
+    @ManyToOne(optional = false)
     private BolsaDeAhorro bolsaDeAhorro;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Miembro miembro;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Ingreso ingreso;
     
     // Constructores
