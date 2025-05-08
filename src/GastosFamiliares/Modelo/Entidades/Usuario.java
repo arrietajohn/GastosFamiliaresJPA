@@ -3,16 +3,30 @@ package GastosFamiliares.Modelo.Entidades;
 import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
+@Entity(name = "Usuarios")
 public class Usuario implements Serializable {
+    @Id
+    @Column(name = "ID", length = 20 )
     protected String codigo; 
+    @Column(length = 30, nullable = false)
     protected String password;
+    @Column(length = 40, nullable = false)
     protected String nombre;
+    @Column(length = 50, nullable = false)
     protected String apellido;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20, nullable = false)
     protected RolUsuarioEnum rol; 
+    @Column(length = 70, nullable = false, unique = true)
     protected String email;
     
     // Constructor por defecto
