@@ -3,26 +3,45 @@ package GastosFamiliares.Modelo.Entidades;
 import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
+@Entity
+@Table(name = "Usuarios")
+
 public class Usuario implements Serializable {
-    protected String codigo; 
+
+    private static final long serialVersionUID = 0L;
+    @Id
+    @Column(name = "ID", length = 20)
+    protected String codigo;
+    @Column(length = 30, nullable = false)
     protected String password;
+    @Column(length = 40, nullable = false)
     protected String nombre;
+    @Column(length = 50, nullable = false)
     protected String apellido;
-    protected RolUsuarioEnum rol; 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20, nullable = false)
+    protected RolUsuarioEnum rol;
+    @Column(length = 70, nullable = false, unique = true)
     protected String email;
-    
+
     // Constructor por defecto
-    public Usuario(){
-        
+    public Usuario() {
+
     }
-    
+
     // Constructores con parametros
-    
-    public Usuario(String id, String nombre, String apellido, RolUsuarioEnum rol){
+    public Usuario(String id, String nombre, String apellido, RolUsuarioEnum rol) {
         codigo = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -37,15 +56,13 @@ public class Usuario implements Serializable {
         this.rol = rol;
         this.email = email;
     }
-    
-    
-    
+
     // Set y get
-    public void setCodigo(String codigo){
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
-    public String getCodigo( ){
+
+    public String getCodigo() {
         return this.codigo;
     }
 
@@ -113,12 +130,9 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "codigo=" + codigo + ", password=" + password + 
-                ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" 
+        return "Usuario{" + "codigo=" + codigo + ", password=" + password
+                + ", nombre=" + nombre + ", apellido=" + apellido + ", rol="
                 + rol + ", email=" + email + '}';
     }
-    
-    
-    
-    
+
 }

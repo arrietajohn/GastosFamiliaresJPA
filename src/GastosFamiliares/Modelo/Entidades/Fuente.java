@@ -2,22 +2,37 @@ package GastosFamiliares.Modelo.Entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
-public class Fuente implements Serializable{
+@Entity
+@Table(name = "Fuentes")
+public class Fuente implements Serializable {
 
-    private int id; //' Autoincremental
-    private String nombre; // 'unico
+    private static final long serialVersionUID = 0L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id; 
+    @Column(nullable = false, unique = true, length = 50)
+    private String nombre; 
     private String descripcion;
+    @Column(length = 20)
     private String icono;
     //    ' Relaciones
+    @OneToMany(mappedBy = "fuente")
     private List<Ingreso> ingresos;
-    
-    // Constructores
 
+    // Constructores
     public Fuente() {
     }
 
@@ -33,9 +48,8 @@ public class Fuente implements Serializable{
         this.icono = icono;
         this.ingresos = ingresos;
     }
-    
-    // Set y Get
 
+    // Set y Get
     public int getId() {
         return id;
     }
@@ -78,8 +92,8 @@ public class Fuente implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + this.id;
+        int hash = 3;
+        hash = 29 * hash + this.id;
         return hash;
     }
 
@@ -95,15 +109,14 @@ public class Fuente implements Serializable{
             return false;
         }
         final Fuente other = (Fuente) obj;
-        return this.id == other.id;
+        return Objects.equals(this.nombre, other.nombre);
     }
 
+   
     @Override
     public String toString() {
-        return "Fuente{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" 
+        return "Fuente{" + "id=" + id + ", nombre=" + nombre + ", descripcion="
                 + descripcion + ", icono=" + icono + ", ingresos=" + ingresos + '}';
     }
-    
-    
-    
+
 }

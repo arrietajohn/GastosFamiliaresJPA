@@ -5,28 +5,53 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
-public class BolsaDeAhorro implements Serializable{
+@Entity
+@Table(name = "Bolsas_de_ahorros")
+public class BolsaDeAhorro implements Serializable {
 
-    private int id; //' Autoincremental
+    private static final long serialVersionUID = 0L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private LocalDateTime fechaRegistro;
+    @Column(nullable = false)
     private LocalDate fechaIncia;
     private LocalDate fechaFin;
+    @Column(nullable = false, length = 50)
     private String nombre;
+    @Column(nullable = false)
     private float montoIdeal;
     private String proposito;
-    //      ' Realaciones
+    @Enumerated(EnumType.STRING)
+    @Column(length = 10)
     private EstadoBolsaAhorroEnum estado;
+    //      ' Realaciones
+    @ManyToOne
     private Familia familia;
+    @ManyToOne
+    @JoinColumn(name = "USUARIO_CREADOR_ID")
     private Miembro creador;
+    @OneToMany(mappedBy = "bolsaDeAhorro")
     private List<Aporte> aportes;
-    
-    // Constructores
 
+    // Constructores
     public BolsaDeAhorro() {
     }
 
@@ -40,13 +65,10 @@ public class BolsaDeAhorro implements Serializable{
         this.creador = creador;
     }
 
-    
-    
     public BolsaDeAhorro(int id, LocalDateTime fechaRegistro, LocalDate fechaIncia,
             LocalDate fechaFin, String nombre, float montoIdeal, String proposito,
-            EstadoBolsaAhorroEnum estado, Familia familia, Miembro creador, 
-            List<Aporte> aportes) 
-    {
+            EstadoBolsaAhorroEnum estado, Familia familia, Miembro creador,
+            List<Aporte> aportes) {
         this.id = id;
         this.fechaRegistro = fechaRegistro;
         this.fechaIncia = fechaIncia;
@@ -59,9 +81,8 @@ public class BolsaDeAhorro implements Serializable{
         this.creador = creador;
         this.aportes = aportes;
     }
-    
-    // Set y Get
 
+    // Set y Get
     public int getId() {
         return id;
     }
@@ -174,13 +195,12 @@ public class BolsaDeAhorro implements Serializable{
 
     @Override
     public String toString() {
-        return "BolsaDeAhorro{" + "id=" + id + ", fechaRegistro=" + fechaRegistro 
-                + ", fechaIncia=" + fechaIncia + ", fechaFin=" + fechaFin 
-                + ", nombre=" + nombre + ", montoIdeal=" + montoIdeal 
-                + ", proposito=" + proposito + ", estado=" + estado + ", familia=" 
-                + familia + ", creador=" + creador 
+        return "BolsaDeAhorro{" + "id=" + id + ", fechaRegistro=" + fechaRegistro
+                + ", fechaIncia=" + fechaIncia + ", fechaFin=" + fechaFin
+                + ", nombre=" + nombre + ", montoIdeal=" + montoIdeal
+                + ", proposito=" + proposito + ", estado=" + estado + ", familia="
+                + familia + ", creador=" + creador
                 + ", aportes=" + (aportes != null ? aportes.size() : 0) + '}';
     }
-    
-    
+
 }
