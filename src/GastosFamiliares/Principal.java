@@ -14,5 +14,9 @@ public class Principal {
         System.out.println("Prueba del proyecto");
         //UsuarioDaoTest.crearNuevoUsuarioDebeGuardarSinError();
         //UsuarioDaoTest.buscarUsuarioPorIdDebeMostrarLosDatosDelUsuario();
+        UsuarioDaoTest.listarTodosLosUsuarioDebeMostarSusDatos();
+//        UsuarioDaoTest.actualizarUsuarioDebeActualizarSinError();
+        UsuarioDaoTest.eliminarUsuarioDebeEliminarSinError();
+        UsuarioDaoTest.listarTodosLosUsuarioDebeMostarSusDatos();
     }
 }
