@@ -1,8 +1,9 @@
 package GastosFamiliares;
 
 import GastosFamiliares.Infrastuctura.Config.Bd.ConexionBd;
-import GastosFamiliares.Modelo.Dao.UsuarioDao;
+import GastosFamiliares.Infrastuctura.Dao.UsuarioDao;
 import GastosFamiliares.Pruebas.Dao.UsuarioDaoTest;
+import GastosFamiliares.Vistas.Gui.VentanaPrincipal;
 
 /**
  *
@@ -12,11 +13,10 @@ public class Principal {
 
     public static void main(String parametros[]) {
         System.out.println("Prueba del proyecto");
-        //UsuarioDaoTest.crearNuevoUsuarioDebeGuardarSinError();
-        //UsuarioDaoTest.buscarUsuarioPorIdDebeMostrarLosDatosDelUsuario();
-//        UsuarioDaoTest.listarTodosLosUsuarioDebeMostarSusDatos();
-//        UsuarioDaoTest.actualizarUsuarioDebeActualizarSinError();
-//        UsuarioDaoTest.eliminarUsuarioDebeEliminarSinError();
-//        UsuarioDaoTest.listarTodosLosUsuarioDebeMostarSusDatos();
+        UsuarioDaoTest.crearNuevoUsuarioDebeGuardarSinError();
+        VentanaPrincipal ventana = new VentanaPrincipal();
+        ventana.setExtendedState(VentanaPrincipal.MAXIMIZED_BOTH);
+        ventana.setVisible(true);
+        
     }
 }

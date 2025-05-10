@@ -1,6 +1,6 @@
 package GastosFamiliares.Pruebas.Dao;
 
-import GastosFamiliares.Modelo.Dao.UsuarioDao;
+import GastosFamiliares.Infrastuctura.Dao.UsuarioDao;
 import GastosFamiliares.Modelo.Entidades.Usuario;
 import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 
