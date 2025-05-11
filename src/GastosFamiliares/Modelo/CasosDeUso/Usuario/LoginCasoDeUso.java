@@ -1,12 +1,9 @@
-package GastosFamiliares.Modelo.CasosDeUso;
+package GastosFamiliares.Modelo.CasosDeUso.Usuario;
 
 import GastosFamiliares.Infrastuctura.Dao.UsuarioDao;
 import GastosFamiliares.Modelo.Dto.Usuarios.LoginPeticionVista;
 import GastosFamiliares.Modelo.Dto.Usuarios.LoginRespuestaVista;
 import GastosFamiliares.Modelo.Entidades.Usuario;
-import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

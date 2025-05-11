@@ -7,5 +7,6 @@ package GastosFamiliares.Modelo.Enumeraciones;
  */
 public enum RolUsuarioEnum {
     ADMINISTRADOR,
-    USUARIO
+    USUARIO,
+    MIEMBRE
 }

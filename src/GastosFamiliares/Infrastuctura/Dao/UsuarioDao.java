@@ -34,7 +34,7 @@ public class UsuarioDao {
             transaccion.commit();
         } catch (Exception error) {
             if (transaccion != null && transaccion.isActive()) {
-                transaccion.rollback();
+                transaccion.rollback    ();
             }
             var mesajeError = "Error al guardar el Usuario: " + usuario.getCodigo();
             throw new Exception(mesajeError);

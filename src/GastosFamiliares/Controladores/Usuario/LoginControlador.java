@@ -1,6 +1,6 @@
-package GastosFamiliares.Controladores;
+package GastosFamiliares.Controladores.Usuario;
 
-import GastosFamiliares.Modelo.CasosDeUso.LoginCasoDeUso;
+import GastosFamiliares.Modelo.CasosDeUso.Usuario.LoginCasoDeUso;
 import GastosFamiliares.Modelo.Dto.Usuarios.LoginPeticionVista;
 import GastosFamiliares.Modelo.Dto.Usuarios.LoginRespuestaVista;
 

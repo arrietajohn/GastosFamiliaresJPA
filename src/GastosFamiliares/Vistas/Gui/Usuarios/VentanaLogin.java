@@ -4,9 +4,9 @@
  */
 package GastosFamiliares.Vistas.Gui.Usuarios;
 
-import GastosFamiliares.Controladores.LoginControlador;
+import GastosFamiliares.Controladores.Usuario.LoginControlador;
 import GastosFamiliares.Infrastuctura.Dao.UsuarioDao;
-import GastosFamiliares.Modelo.CasosDeUso.LoginCasoDeUso;
+import GastosFamiliares.Modelo.CasosDeUso.Usuario.LoginCasoDeUso;
 import GastosFamiliares.Modelo.Dto.Usuarios.LoginPeticionVista;
 import GastosFamiliares.Vistas.Gui.VentanaPrincipal;
 import javax.swing.JOptionPane;
@@ -19,6 +19,8 @@ public class VentanaLogin extends javax.swing.JDialog {
 
     private LoginControlador controlador;
     private final VentanaPrincipal ventanPrincipal;
+    private VentanaRegistrarse ventanaRegistrarse;
+
     /**
      * Creates new form VentanaLogin
      */
@@ -46,7 +48,7 @@ public class VentanaLogin extends javax.swing.JDialog {
         campoCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         campoPassword = new javax.swing.JPasswordField();
-        etiquetaMensaje = new javax.swing.JLabel();
+        etiquetaLinkRegistrarse = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         botonCancelar = new javax.swing.JButton();
         botonAceptar = new javax.swing.JButton();
@@ -74,8 +76,16 @@ public class VentanaLogin extends javax.swing.JDialog {
         campoPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoPassword.setToolTipText("Digite su clave ");
 
-        etiquetaMensaje.setForeground(new java.awt.Color(255, 0, 0));
-        etiquetaMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiquetaLinkRegistrarse.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        etiquetaLinkRegistrarse.setForeground(new java.awt.Color(0, 0, 204));
+        etiquetaLinkRegistrarse.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiquetaLinkRegistrarse.setText("Registrarse...");
+        etiquetaLinkRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        etiquetaLinkRegistrarse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                etiquetaLinkRegistrarseMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelFormLayout = new javax.swing.GroupLayout(panelForm);
         panelForm.setLayout(panelFormLayout);
@@ -92,9 +102,9 @@ public class VentanaLogin extends javax.swing.JDialog {
                         .addGroup(panelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoCodigo)
                             .addComponent(campoPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
-                    .addGroup(panelFormLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(etiquetaMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFormLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(etiquetaLinkRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelFormLayout.setVerticalGroup(
@@ -109,8 +119,8 @@ public class VentanaLogin extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(campoPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(etiquetaMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(etiquetaLinkRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -121,6 +131,11 @@ public class VentanaLogin extends javax.swing.JDialog {
         botonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonCancelar.setText("Cancelar");
         botonCancelar.setToolTipText("Pulsar para cerrar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
         botonAceptar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonAceptar.setText("Aceptar");
@@ -161,7 +176,7 @@ public class VentanaLogin extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(etiquetaIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botonAceptar)
                     .addComponent(botonCancelar))
@@ -181,12 +196,26 @@ public class VentanaLogin extends javax.swing.JDialog {
             ventanPrincipal.setUsuarioLogeado(respuesta);
             this.dispose();
         } catch (Exception error) {
-            JOptionPane.showMessageDialog(this, 
+            JOptionPane.showMessageDialog(this,
                     error.getMessage(), "Verificar", JOptionPane.ERROR_MESSAGE);
         }
 
 
     }//GEN-LAST:event_botonAceptarActionPerformed
+
+    private void etiquetaLinkRegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaLinkRegistrarseMouseClicked
+        this.setVisible(false);
+        if (ventanaRegistrarse == null) {
+            ventanaRegistrarse = new VentanaRegistrarse(ventanPrincipal, true);
+        }
+        ventanaRegistrarse.setVentanaLogin(this);
+        ventanaRegistrarse.setLocationRelativeTo(ventanPrincipal);
+        ventanaRegistrarse.setVisible(true);
+    }//GEN-LAST:event_etiquetaLinkRegistrarseMouseClicked
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,13 +259,22 @@ public class VentanaLogin extends javax.swing.JDialog {
         });
     }
 
+    public void setVentanaRegistrarse(VentanaRegistrarse ventanaRegistrarse) {
+        this.ventanaRegistrarse = ventanaRegistrarse;
+    }
+
+    public VentanaRegistrarse getVentanaRegistrarse() {
+        return ventanaRegistrarse;
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonCancelar;
     private javax.swing.JTextField campoCodigo;
     private javax.swing.JPasswordField campoPassword;
     private javax.swing.JLabel etiquetaIcono;
-    private javax.swing.JLabel etiquetaMensaje;
+    private javax.swing.JLabel etiquetaLinkRegistrarse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
