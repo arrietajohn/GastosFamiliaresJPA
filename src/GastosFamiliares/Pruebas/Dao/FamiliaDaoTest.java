@@ -4,8 +4,6 @@ import GastosFamiliares.Infrastuctura.Dao.FamiliaDao;
 import GastosFamiliares.Modelo.Entidades.Familia;
 import GastosFamiliares.Modelo.Entidades.Usuario;
 import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -14,9 +12,6 @@ import java.util.logging.Logger;
 public class FamiliaDaoTest {
     public static void guardarFamiliaDebeGuardarLaFamiliaSinError(){
         // Arrange
-        // Usuario(ID           DTYPE	APELLIDO	EMAIL	NOMBRE	PASSWORD	ROL	FECHANACIMIENTO	FOTO	GENERO	NUMEROTELEFONICO	OCUPACION	ROLFAMILIA	SEGUNDOAPELLIDO	SEGUNDONOMBRE	FAMILIA_ID
-        //         1234567	Usuario	Arrieta         ""	John	Abc**           USUARIO	""              ""	""	""                      ""              ""              ""               ""             ""
-
         var usuario = new Usuario(
                 "77788899", 
                 "Abc**", 
