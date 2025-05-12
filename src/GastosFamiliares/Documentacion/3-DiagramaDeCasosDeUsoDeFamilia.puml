@@ -6,6 +6,9 @@ actor Administrador as Admin
 actor Miembro as Miembro
 
 package Gestion_de_Familias {
+    User --> (Crear mi Familia)
+    User --> (Solictar ser miembro de una Familia)
+    Miembro --> (Solictar ser miembro de una Familia)
     Miembro  --> (Crear mi Familia)
     Miembro --> (Actualizar Información de mi la Familia)
     Miembro --> (Eliminar mi Familia)
