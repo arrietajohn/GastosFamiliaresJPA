@@ -1,16 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GastosFamiliares.Vistas.Gui;
 
 import GastosFamiliares.Modelo.Dto.Usuarios.LoginRespuestaDto;
+import GastosFamiliares.Vistas.Gui.Familias.VentanaCrudFamilia;
 import GastosFamiliares.Vistas.Gui.Usuarios.VentanaActualizar;
 import GastosFamiliares.Vistas.Gui.Usuarios.VentanaLogin;
 
 /**
  *
- * @author pc
+ * @author John Carlos Arrieta
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -45,6 +42,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         menuMiembros = new javax.swing.JMenu();
         menuFamilias = new javax.swing.JMenu();
+        itemNuevaFamilia = new javax.swing.JMenuItem();
         menuFuentes = new javax.swing.JMenu();
         menuIngresos = new javax.swing.JMenu();
         menuCategorias = new javax.swing.JMenu();
@@ -97,6 +95,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         barraDeMenu.add(menuMiembros);
 
         menuFamilias.setText("Familias");
+
+        itemNuevaFamilia.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        itemNuevaFamilia.setText("Nueva...");
+        itemNuevaFamilia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemNuevaFamiliaActionPerformed(evt);
+            }
+        });
+        menuFamilias.add(itemNuevaFamilia);
+
         barraDeMenu.add(menuFamilias);
 
         menuFuentes.setText("Fuentes");
@@ -160,6 +168,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_itemActualizarUsuarioActionPerformed
 
+    private void itemNuevaFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNuevaFamiliaActionPerformed
+       var ventana = new VentanaCrudFamilia(this, true);
+       ventana.setVentanaPrincipal(this);
+       ventana.setLocationRelativeTo(this);
+       ventana.setTitle("Gestion de famlias");
+       ventana.setVisible(true);
+    }//GEN-LAST:event_itemNuevaFamiliaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -199,6 +215,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraDeMenu;
     private javax.swing.JMenuItem itemActualizarUsuario;
     private javax.swing.JMenuItem itemCerrarSesionUsuario;
+    private javax.swing.JMenuItem itemNuevaFamilia;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu menuAportes;
