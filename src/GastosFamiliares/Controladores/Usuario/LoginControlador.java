@@ -1,8 +1,8 @@
 package GastosFamiliares.Controladores.Usuario;
 
 import GastosFamiliares.Modelo.CasosDeUso.Usuario.LoginCasoDeUso;
-import GastosFamiliares.Modelo.Dto.Usuarios.LoginPeticionVista;
-import GastosFamiliares.Modelo.Dto.Usuarios.LoginRespuestaVista;
+import GastosFamiliares.Modelo.Dto.Usuarios.LoginPeticionDto;
+import GastosFamiliares.Modelo.Dto.Usuarios.LoginRespuestaDto;
 
 /**
  *
@@ -16,7 +16,7 @@ public class LoginControlador {
         this.loginCasoDeUso = casoDeUso;
     }
     
-    public LoginRespuestaVista ejecutarAccion(LoginPeticionVista peticion) throws Exception{
+    public LoginRespuestaDto ejecutarAccion(LoginPeticionDto peticion) throws Exception{
         return loginCasoDeUso.procesar(peticion);
     }
 }

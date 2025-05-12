@@ -4,7 +4,8 @@
  */
 package GastosFamiliares.Vistas.Gui;
 
-import GastosFamiliares.Modelo.Dto.Usuarios.LoginRespuestaVista;
+import GastosFamiliares.Modelo.Dto.Usuarios.LoginRespuestaDto;
+import GastosFamiliares.Vistas.Gui.Usuarios.VentanaActualizar;
 import GastosFamiliares.Vistas.Gui.Usuarios.VentanaLogin;
 
 /**
@@ -13,7 +14,8 @@ import GastosFamiliares.Vistas.Gui.Usuarios.VentanaLogin;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    private LoginRespuestaVista usuarioLogeado;
+    private LoginRespuestaDto usuarioLogeado;
+    
     /**
      * Creates new form VentanaPrincipal
      */
@@ -21,7 +23,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void setUsuarioLogeado(LoginRespuestaVista usuarioLogeado) {
+    public void setUsuarioLogeado(LoginRespuestaDto usuarioLogeado) {
         this.usuarioLogeado = usuarioLogeado;
     }
 
@@ -37,8 +39,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         barraDeMenu = new javax.swing.JMenuBar();
         menuUsuarios = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        itemCerrarSesionUsuario = new javax.swing.JMenuItem();
+        itemActualizarUsuario = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         menuMiembros = new javax.swing.JMenu();
@@ -59,13 +61,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        menuUsuarios.setMnemonic('U');
         menuUsuarios.setText("Usuarios");
 
-        jMenuItem1.setText("Cerrar sesion...");
-        menuUsuarios.add(jMenuItem1);
+        itemCerrarSesionUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        itemCerrarSesionUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GastosFamiliares/Vistas/Gui/Iconos/logout24px.png"))); // NOI18N
+        itemCerrarSesionUsuario.setMnemonic('C');
+        itemCerrarSesionUsuario.setText("Cerrar sesion...");
+        itemCerrarSesionUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCerrarSesionUsuarioActionPerformed(evt);
+            }
+        });
+        menuUsuarios.add(itemCerrarSesionUsuario);
 
-        jMenuItem2.setText("Actualizar perfil...");
-        menuUsuarios.add(jMenuItem2);
+        itemActualizarUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        itemActualizarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GastosFamiliares/Vistas/Gui/Iconos/actulizar-usuario24px.png"))); // NOI18N
+        itemActualizarUsuario.setText("Actualizar perfil...");
+        itemActualizarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemActualizarUsuarioActionPerformed(evt);
+            }
+        });
+        menuUsuarios.add(itemActualizarUsuario);
 
         jMenuItem3.setText("Cerrar cuenta");
         menuUsuarios.add(jMenuItem3);
@@ -117,12 +135,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+      
+    public LoginRespuestaDto getUsuarioLogeado() {
+        return usuarioLogeado;
+    }
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         VentanaLogin ventana = new VentanaLogin(this, true, this);
         ventana.setLocationRelativeTo(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_formWindowOpened
+
+    private void itemCerrarSesionUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCerrarSesionUsuarioActionPerformed
+        VentanaLogin ventana = new VentanaLogin(this, true, this);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemCerrarSesionUsuarioActionPerformed
+
+    private void itemActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemActualizarUsuarioActionPerformed
+       VentanaActualizar ventana = new VentanaActualizar(this, true);
+       ventana.setLocationRelativeTo(this);
+       ventana.setVentanaPrincipal(this);
+       ventana.setVisible(true);
+       
+    }//GEN-LAST:event_itemActualizarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,8 +197,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraDeMenu;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem itemActualizarUsuario;
+    private javax.swing.JMenuItem itemCerrarSesionUsuario;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu menuAportes;

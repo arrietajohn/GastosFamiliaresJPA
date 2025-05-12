@@ -7,7 +7,7 @@ package GastosFamiliares.Vistas.Gui.Usuarios;
 import GastosFamiliares.Controladores.Usuario.LoginControlador;
 import GastosFamiliares.Infrastuctura.Dao.UsuarioDao;
 import GastosFamiliares.Modelo.CasosDeUso.Usuario.LoginCasoDeUso;
-import GastosFamiliares.Modelo.Dto.Usuarios.LoginPeticionVista;
+import GastosFamiliares.Modelo.Dto.Usuarios.LoginPeticionDto;
 import GastosFamiliares.Vistas.Gui.VentanaPrincipal;
 import javax.swing.JOptionPane;
 
@@ -53,7 +53,7 @@ public class VentanaLogin extends javax.swing.JDialog {
         botonCancelar = new javax.swing.JButton();
         botonAceptar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Control de acceso");
 
         etiquetaIcono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -191,7 +191,7 @@ public class VentanaLogin extends javax.swing.JDialog {
             var codigo = campoCodigo.getText();
             var pass1 = campoPassword.getPassword();
             var password = String.valueOf(pass1);
-            var peticion = new LoginPeticionVista(codigo, password);
+            var peticion = new LoginPeticionDto(codigo, password);
             var respuesta = controlador.ejecutarAccion(peticion);
             ventanPrincipal.setUsuarioLogeado(respuesta);
             this.dispose();
@@ -214,7 +214,7 @@ public class VentanaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_etiquetaLinkRegistrarseMouseClicked
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     /**

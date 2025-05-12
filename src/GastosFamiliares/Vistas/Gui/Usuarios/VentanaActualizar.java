@@ -4,9 +4,18 @@
  */
 package GastosFamiliares.Vistas.Gui.Usuarios;
 
+import GastosFamiliares.Controladores.Usuario.BuscarUsuarioPorIdControlador;
+import GastosFamiliares.Controladores.Usuario.EditarUsuarioControlador;
 import GastosFamiliares.Controladores.Usuario.RegistrarseControlador;
 import GastosFamiliares.Infrastuctura.Dao.UsuarioDao;
+import GastosFamiliares.Modelo.CasosDeUso.Usuario.BuscarUsuarioPorIdCasoDeUso;
+import GastosFamiliares.Modelo.CasosDeUso.Usuario.EditarUsuarioCasoDeUso;
 import GastosFamiliares.Modelo.CasosDeUso.Usuario.RegistrarseCasoDeUso;
+import GastosFamiliares.Modelo.Dto.Usuarios.BuscarUsuarioPorIdPeticionDto;
+import GastosFamiliares.Modelo.Dto.Usuarios.BuscarUsuarioPorIdRespuestaDto;
+import GastosFamiliares.Modelo.Dto.Usuarios.EditarUsuarioPeticionDto;
+import GastosFamiliares.Modelo.Dto.Usuarios.EditarUsuarioRespuestDto;
+import GastosFamiliares.Modelo.Dto.Usuarios.LoginRespuestaDto;
 import GastosFamiliares.Modelo.Dto.Usuarios.RegistrarsePeticionDto;
 import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 import GastosFamiliares.Vistas.Gui.VentanaPrincipal;
@@ -17,15 +26,14 @@ import javax.swing.JOptionPane;
  *
  * @author pc
  */
-public class VentanaRegistrarse extends javax.swing.JDialog {
+public class VentanaActualizar extends javax.swing.JDialog {
 
     private VentanaPrincipal ventanaPrincipal;
-    private VentanaLogin ventanaLogin;
 
     /**
      * Creates new form VentanaRegistrarse
      */
-    public VentanaRegistrarse(java.awt.Frame parent, boolean modal) {
+    public VentanaActualizar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         ventanaPrincipal = (VentanaPrincipal) ((JFrame) parent.getOwner());
@@ -59,14 +67,19 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
         radioRolMiembro = new javax.swing.JRadioButton();
         campoPassword1 = new javax.swing.JPasswordField();
         campoPassword2 = new javax.swing.JPasswordField();
-        radioRolUsuario1 = new javax.swing.JRadioButton();
-        botonGuardar = new javax.swing.JButton();
+        radioRolAdmin = new javax.swing.JRadioButton();
+        botonActualizar = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Gestión de usuarios");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -82,6 +95,7 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Codigo:");
 
+        campoCodigo.setEditable(false);
         campoCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -136,12 +150,12 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
 
         campoPassword2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        grupoRol.add(radioRolUsuario1);
-        radioRolUsuario1.setText("Administador");
-        radioRolUsuario1.setEnabled(false);
-        radioRolUsuario1.addActionListener(new java.awt.event.ActionListener() {
+        grupoRol.add(radioRolAdmin);
+        radioRolAdmin.setText("Administador");
+        radioRolAdmin.setEnabled(false);
+        radioRolAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioRolUsuario1ActionPerformed(evt);
+                radioRolAdminActionPerformed(evt);
             }
         });
 
@@ -163,7 +177,7 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(radioRolUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(radioRolAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(radioRolUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -205,7 +219,7 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
                     .addComponent(jLabel10)
                     .addComponent(radioRolUsuario)
                     .addComponent(radioRolMiembro)
-                    .addComponent(radioRolUsuario1))
+                    .addComponent(radioRolAdmin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoEmail)
@@ -213,11 +227,11 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
                 .addGap(26, 26, 26))
         );
 
-        botonGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        botonGuardar.setText(" Guardar");
-        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+        botonActualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        botonActualizar.setText(" Guardar");
+        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarActionPerformed(evt);
+                botonActualizarActionPerformed(evt);
             }
         });
 
@@ -249,7 +263,7 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(botonGuardar)
+                            .addComponent(botonActualizar)
                             .addGap(45, 45, 45)
                             .addComponent(botonCancelar))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -274,24 +288,28 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonCancelar)
-                    .addComponent(botonGuardar))
+                    .addComponent(botonActualizar))
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
+        this.ventanaPrincipal = ventanaPrincipal;
+    }
+
     private void radioRolUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioRolUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioRolUsuarioActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-        this.setVisible(false);
-        ventanaLogin.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_botonCancelarActionPerformed
 
-    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+
+    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
         var codigo = campoCodigo.getText();
         var password1 = String.valueOf(campoPassword1.getPassword());
         var password2 = String.valueOf(campoPassword2.getPassword());
@@ -314,32 +332,49 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
         }
 
         try {
-            var peticion = new RegistrarsePeticionDto(
+            var peticion = new EditarUsuarioPeticionDto(
                     codigo,
                     password1,
                     nombre,
                     apellido,
                     rol,
                     email);
+
             var usuarioDao = new UsuarioDao();
-            var casosDeUso = new RegistrarseCasoDeUso(usuarioDao);
-            var controlador = new RegistrarseControlador(casosDeUso);
-            controlador.ejecutarAccion(peticion);
-            JOptionPane.showMessageDialog(this, "Usuario registado con exito");
-            limpiarFormulario();
+            var casosDeUso = new EditarUsuarioCasoDeUso(usuarioDao);
+            var controlador = new EditarUsuarioControlador(casosDeUso);
+            var respuesta = controlador.ejecutarAccion(peticion);
+            ventanaPrincipal.setUsuarioLogeado(transformarALoginRespuestaDto(respuesta));
+            JOptionPane.showMessageDialog(this, "Usuario actualizado con exito");
         } catch (Exception error) {
             JOptionPane.showMessageDialog(this, error.getMessage(), "Verificar",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_botonGuardarActionPerformed
+    }//GEN-LAST:event_botonActualizarActionPerformed
 
     private void radioRolMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioRolMiembroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioRolMiembroActionPerformed
 
-    private void radioRolUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioRolUsuario1ActionPerformed
+    private void radioRolAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioRolAdminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_radioRolUsuario1ActionPerformed
+    }//GEN-LAST:event_radioRolAdminActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            var peticion = new BuscarUsuarioPorIdPeticionDto(
+                    ventanaPrincipal.getUsuarioLogeado().getCodigo());
+            var usuarioDao = new UsuarioDao();
+            var casoDeUso = new BuscarUsuarioPorIdCasoDeUso(usuarioDao);
+            var controlador = new BuscarUsuarioPorIdControlador(casoDeUso);
+            var respuesta = controlador.ejecutarAccion(peticion);
+            mostarDatos(respuesta);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error.getMessage(), "Verificar",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -358,20 +393,21 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaRegistrarse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaActualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaRegistrarse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaActualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaRegistrarse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaActualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaRegistrarse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaActualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VentanaRegistrarse dialog = new VentanaRegistrarse(new javax.swing.JFrame(), true);
+                VentanaActualizar dialog = new VentanaActualizar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -383,16 +419,7 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
         });
     }
 
-    public void setVentanaLogin(VentanaLogin ventanaLogin) {
-        this.ventanaLogin = ventanaLogin;
-    }
-
-    public VentanaLogin getVentanaLogin() {
-        return ventanaLogin;
-    }
-
-    
-    private void limpiarFormulario(){
+    private void limpiarFormulario() {
         campoApellido.setText("");
         campoCodigo.setText("");
         campoEmail.setText("");
@@ -400,9 +427,40 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
         campoPassword1.setText("");
         campoPassword2.setText("");
     }
+
+    private void mostarDatos(BuscarUsuarioPorIdRespuestaDto usuario) {
+
+        campoApellido.setText(usuario.getApellido());
+        campoCodigo.setText(usuario.getCodigo());
+        campoEmail.setText(usuario.getEmail());
+        campoNombre.setText(usuario.getNombre());
+        campoPassword1.setText(usuario.getPassword());
+        campoPassword2.setText(usuario.getPassword());
+        switch (usuario.getRol()) {
+            case ADMINISTRADOR ->
+                radioRolAdmin.setSelected(true);
+            case USUARIO ->
+                radioRolUsuario.setSelected(true);
+            case MIEMBRO ->
+                radioRolMiembro.setSelected(true);
+            default -> {
+            }
+        }
+    }
+
+    private LoginRespuestaDto transformarALoginRespuestaDto(EditarUsuarioRespuestDto respuesta) {
+        return new LoginRespuestaDto(
+                respuesta.getCodigo(),
+                respuesta.getNombre(),
+                respuesta.getApellido(),
+                respuesta.getRol(),
+                respuesta.getEmail());
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonCancelar;
-    private javax.swing.JButton botonGuardar;
     private javax.swing.JTextField campoApellido;
     private javax.swing.JTextField campoCodigo;
     private javax.swing.JTextField campoEmail;
@@ -422,8 +480,8 @@ public class VentanaRegistrarse extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton radioRolAdmin;
     private javax.swing.JRadioButton radioRolMiembro;
     private javax.swing.JRadioButton radioRolUsuario;
-    private javax.swing.JRadioButton radioRolUsuario1;
     // End of variables declaration//GEN-END:variables
 }

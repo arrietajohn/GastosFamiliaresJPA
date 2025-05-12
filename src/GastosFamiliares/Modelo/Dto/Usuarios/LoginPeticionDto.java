@@ -4,12 +4,12 @@ package GastosFamiliares.Modelo.Dto.Usuarios;
  *
  * @author John Carlos Arrieta Arrieta
  */
-public class LoginPeticionVista {
+public class LoginPeticionDto {
     
     private final String codigo;
     private final String password;
     
-    public LoginPeticionVista(String codigo, String password){
+    public LoginPeticionDto(String codigo, String password){
         if(codigo == null || codigo.trim().isEmpty() ) {
             var mensaje = "El codigo es requerido";
             throw new IllegalArgumentException(mensaje);
