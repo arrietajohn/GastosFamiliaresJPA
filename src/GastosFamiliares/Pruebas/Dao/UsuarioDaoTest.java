@@ -14,12 +14,12 @@ public class UsuarioDaoTest {
     public static void crearNuevoUsuarioDebeGuardarSinError() {
         // Arrange (Preparar)
         var usuario = new Usuario(
-                "U-2",
+                "U-1",
                 "!23Abc$$",
-                "Fulanito2",
+                "Fulanito1",
                 "De tal",
                 RolUsuarioEnum.USUARIO,
-                "fulanito2@gmail.com");
+                "fulanito1@gmail.com");
         try {
             var usuarioDao = new UsuarioDao();
             // Act (Actuar)

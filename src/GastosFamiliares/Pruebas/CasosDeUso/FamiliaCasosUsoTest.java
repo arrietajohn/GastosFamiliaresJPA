@@ -4,20 +4,16 @@ import GastosFamiliares.Infrastuctura.Dao.FamiliaDao;
 import GastosFamiliares.Infrastuctura.Dao.UsuarioDao;
 import GastosFamiliares.Modelo.CasosDeUso.Familia.CrearFamiliaCasoDeUso;
 import GastosFamiliares.Modelo.Dto.Familia.CrearFamiliaPeticionDto;
-import GastosFamiliares.Modelo.Entidades.Usuario;
-import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
-public class FamiliaCasosUso {
+public class FamiliaCasosUsoTest {
     public static void crearFamiliaDebeGuardalaSinError(){
         try {
             // Arrange
-            var usuarioId = "1234567";
+            var usuarioId = "U-1";
             var nombre = "Familia Villareal";
             var email = "farrietavillarreal@hotmail.com";
             var numeroTelefonico = "6784748";
