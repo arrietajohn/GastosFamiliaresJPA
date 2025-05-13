@@ -7,21 +7,34 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author John Carlos Arrieta Arrieta
  */
 @Entity
-public class Miembro extends Usuario implements Serializable {
+@DiscriminatorValue("Miembro")
+public class Miembro implements Serializable {
 
     private static final long serialVersionUID = 0L;
-    
+
+    @Id
+    @Column(name = "ID")
+    private String codigo;
+    @MapsId
+    @OneToOne()
+    @JoinColumn(name = "ID")
+    private Usuario usuario;
     @Column(length = 30)
     private String segundoNombre;
     @Column(length = 50)
@@ -37,6 +50,8 @@ public class Miembro extends Usuario implements Serializable {
     @Column(length = 40)
     private String ocupacion;
 //       ' Relaciones
+    @Enumerated(EnumType.STRING)
+    @Column(length = 15)
     private RolFamiliaEnum rolFamilia;
     @ManyToOne
     private Familia familia;
@@ -53,24 +68,22 @@ public class Miembro extends Usuario implements Serializable {
     public Miembro() {
     }
 
-    public Miembro(String id, String nombre, String apellido, RolUsuarioEnum rol) {
-        super(id, nombre, apellido, rol);
+    public Miembro(Usuario usuario ) {
+        this.usuario = usuario;
     }
 
-    public Miembro(String codigo, String password, String nombre, String apellido, RolUsuarioEnum rol, String email) {
-        super(codigo, password, nombre, apellido, rol, email);
-    }
+  public Miembro(Usuario usuario, String segundoNombre, String segundoApellido, 
+        GeneroEnum genero,  LocalDate fechaNacimiento, String ocupacion, Familia familia) {
+    this.usuario = usuario; // ✅ ESTE FALTABA
+    this.codigo = usuario.getCodigo(); // este incluso puede omitirse con @MapsId
+    this.segundoNombre = segundoNombre;
+    this.segundoApellido = segundoApellido;
+    this.genero = genero;
+    this.fechaNacimiento = fechaNacimiento;
+    this.ocupacion = ocupacion;
+    this.familia = familia;
+}
 
-    public Miembro(String id, String nombre, String apellido, RolUsuarioEnum rol,
-            String segundoNombre, String segundoApellido, GeneroEnum genero,
-            LocalDate fechaNacimiento, String ocupacion) {
-        super(id, nombre, apellido, rol);
-        this.segundoNombre = segundoNombre;
-        this.segundoApellido = segundoApellido;
-        this.genero = genero;
-        this.fechaNacimiento = fechaNacimiento;
-        this.ocupacion = ocupacion;
-    }
 
     // Set Get
     public String getSegundoNombre() {
@@ -175,6 +188,22 @@ public class Miembro extends Usuario implements Serializable {
 
     public void setBolsasDeAhorros(List<BolsaDeAhorro> bolsasDeAhorros) {
         this.bolsasDeAhorros = bolsasDeAhorros;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
