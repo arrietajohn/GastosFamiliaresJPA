@@ -14,14 +14,13 @@ public class FamilyDaoTest {
 
     public static void saveFamily_shouldSaveFamilyWithoutError() {
         // Arrange
-        var user = new User(
-                "77788899",
-                "Abc**",
-                "John",
-                "Arrieta",
+      var user = new User(
+                "U-1",
+                "!23Abc$$",
+                "Fulanito1",
+                "De Tal",
                 UserRoleEnum.USER,
-                ""
-        );
+                "fulanito1@gmail.com");
 
         var family = new Family("Arrieta Arrieta", user);
         family.setAddress("Cartagena");
