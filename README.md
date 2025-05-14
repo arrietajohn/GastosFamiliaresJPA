@@ -1,2 +1,2 @@
-# GastosFamiliaresJPA
-Ejemplo de cómo construir una aplicación desde diagrama de casos de uso, diagrama clases y java
+# El proyecto llega hasta esta rama en gestionado por ANT 
+Todas las ramas anteriores a estas incluyendo estaran bajo la organizacion de AND
