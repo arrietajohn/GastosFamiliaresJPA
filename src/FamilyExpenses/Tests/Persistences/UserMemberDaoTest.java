@@ -19,7 +19,8 @@ public class UserMemberDaoTest {
 
     public static void saveUserMember_shouldSaveWithoutErrors() {
         try {
-            var user = new User("U-1", "Abc**", "Fulanito1", "De Tal", UserRoleEnum.USER, "fulanito1@gmail.com");
+            var user = new User("U-1", "Abc**", "Fulanito1", "De Tal"
+                    , UserRoleEnum.USER, "fulanito1@gmail.com");
 
             var family = new Family(
                 1,

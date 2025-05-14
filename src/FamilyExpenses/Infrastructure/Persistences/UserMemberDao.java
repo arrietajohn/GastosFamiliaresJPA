@@ -74,7 +74,7 @@ public class UserMemberDao {
             }
             tx = em.getTransaction();
             tx.begin();
-            em.persist(member);
+            em.merge(member);
             tx.commit();
         } catch (EntityNotFoundException e) {
             throw e;
@@ -126,7 +126,8 @@ public class UserMemberDao {
         EntityManager em = null;
         try {
             em = dbConnection.createEntityManager();
-            return em.createQuery("SELECT COUNT(m) FROM UserMember m", Long.class).getSingleResult();
+            var query = "SELECT COUNT(m) FROM UserMember m";
+            return em.createQuery(query, Long.class).getSingleResult();
         } catch (Exception ex) {
             throw new Exception("Internal DB error while counting UserMembers.");
         } finally {

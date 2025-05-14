@@ -6,12 +6,14 @@ left to right direction
 '--------------
 
 class Usuario{
-    # String codigo; 
-    # String password;
-    # String nombre;
-    # String apellido;
-    # RolUsuarioEnum rol; 
-    # String email;
+    - String codigo; 
+    - String password;
+    - String nombre;
+    - String apellido;
+    - RolUsuarioEnum rol; 
+    - String email;
+    ' Relaciones
+    - Miembro miembro: ' Puede ser null
     --
     + Usuario()
     + String getCodigo()
@@ -40,6 +42,7 @@ class Miembro{
     - String ocupacion;
        ' Relaciones
     - RolFamiliaEnum rol; 
+    - Usuario usuario;
     - Familia familia;
     - List<Ingreso> ingresos;
     - List<Gasto> gastos;
@@ -124,7 +127,7 @@ class Aporte{
 '--------------
 ' RELACONES
 '--------------
-Usuario <|-- Miembro : Es un
+Usuario "1" -- "0..1" Miembro : Pueder ser
 Familia "1" -- "*" Miembro : Pertenecer
 Familia "*" -- "1" Usuario : Crear
 Fuente "1" -- "*" Ingreso : Proveer
